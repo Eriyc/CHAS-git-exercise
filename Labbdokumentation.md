@@ -109,6 +109,9 @@ Regeln öppnar bara för ping (ICMP typ 8) och inget annat, vilket är i linje m
 
 ## 4. Git & Versionshantering
 
+![images/git.png](images/git.png)
+[https://github.com/Eriyc/CHAS-git-exercise.git](https://github.com/Eriyc/CHAS-git-exercise.git)
+
 
 ## 5. AI-logg och Utvärdering
 
