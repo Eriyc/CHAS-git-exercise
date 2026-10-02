@@ -112,3 +112,24 @@ Regeln öppnar bara för ping (ICMP typ 8) och inget annat, vilket är i linje m
 
 ## 5. AI-logg och Utvärdering
 
+> Förklara kortfattat vilken motsvarighet Internal Network har i proxmox
+
+Claudes svar: 
+Motsvarigheten till VirtualBox Internal Network i Proxmox är en Linux-brygga utan fysiskt nätverkskort.
+
+Så här gör du:
+
+    Gå till Datacenter → [din nod] → System → Network → Create → Linux Bridge.
+    Ge den ett namn, t.ex. vmbr1.
+    Lämna Bridge ports tomt (ingen koppling till fysiskt NIC).
+    Lämna IPv4/IPv6 tomt, så att värden inte deltar i nätet.
+    Klicka Apply Configuration.
+    Koppla VM:arnas nätverkskort till vmbr1.
+
+VM:arna på vmbr1 kan då bara prata med varandra, precis som i ett Internal Network. Det finns ingen åtkomst till värden eller till omvärlden, om du inte själv sätter upp t.ex. en router-VM med ett ben i varje nät.
+
+Bra att veta:
+
+    Om du ger bryggan en IP-adress fungerar den i stället som VirtualBox Host-only, eftersom värden då kan nå VM:arna.
+    Alternativt kan du använda SDN (Datacenter → SDN) med en Simple zone och en VNet utan gateway och SNAT. Det ger samma isolering och fungerar även över flera noder i ett kluster om du väljer t.ex. VXLAN.
+    Du kan också isolera trafik med VLAN-taggar på en befintlig VLAN-aware brygga.
